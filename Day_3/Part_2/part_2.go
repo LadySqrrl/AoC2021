@@ -3,6 +3,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 )
 
@@ -106,141 +107,105 @@ func main() {
 		}
 	}
 
-	common1, common2, common3, common4, common5, common6, common7, common8, common9, common10, common11, common12 := "", "", "", "", "", "", "", "", "", "", "", ""
-	less1, less2, less3, less4, less5, less6, less7, less8, less9, less10, less11, less12 := "", "", "", "", "", "", "", "", "", "", "", ""
+	var common1, common2, common3, common4, common5, common6, common7, common8, common9, common10, common11, common12 string
 
 	if firstDigit1 >= firstDigit0 {
 		common1 = "1"
-		less1 = "0"
 	} else {
 		common1 = "0"
-		less1 = "1"
 	}
 	if secondDigit1 >= secondDigit0 {
 		common2 = "1"
-		less2 = "0"
 	} else {
 		common2 = "0"
-		less2 = "1"
 	}
 	if thirdDigit1 >= thirdDigit0 {
 		common3 = "1"
-		less3 = "0"
 	} else {
 		common3 = "0"
-		less3 = "1"
 	}
 	if fourthDigit1 >= fourthDigit0 {
 		common4 = "1"
-		less4 = "0"
 	} else {
 		common4 = "0"
-		less4 = "1"
 	}
 	if fifthDigit1 >= fifthDigit0 {
 		common5 = "1"
-		less5 = "0"
 	} else {
 		common5 = "0"
-		less5 = "1"
 	}
 	if sixthDigit1 >= sixthDigit0 {
 		common6 = "1"
-		less6 = "0"
 	} else {
 		common6 = "0"
-		less6 = "1"
 	}
 	if seventhDigit1 >= seventhDigit0 {
 		common7 = "1"
-		less7 = "0"
 	} else {
 		common7 = "0"
-		less7 = "1"
 	}
 	if eighthDigit1 >= eighthDigit0 {
 		common8 = "1"
-		less8 = "0"
 	} else {
 		common8 = "0"
-		less8 = "1"
 	}
 	if ninthDigit1 >= ninthDigit0 {
 		common9 = "1"
-		less9 = "0"
 	} else {
 		common9 = "0"
-		less9 = "1"
 	}
 	if tenthDigit1 >= tenthDigit0 {
 		common10 = "1"
-		less10 = "0"
 	} else {
 		common10 = "0"
-		less10 = "1"
 	}
 	if eleventhDigit1 >= eleventhDigit0 {
 		common11 = "1"
-		less11 = "0"
 	} else {
 		common11 = "0"
-		less11 = "1"
 	}
 	if twelfthDigit1 >= twelfthDigit0 {
 		common12 = "1"
-		less12 = "0"
 	} else {
 		common12 = "0"
-		less12 = "1"
 	}
 
-	var oxygen []string
-	var c02 []string
+	commonStr := common12 + common11 + common10 + common9 + common8 + common7 + common6 + common5 + common4 + common3 + common2 + common1
+	fmt.Println(commonStr)
 
-	for j := 0; j < 12; j++ {
-		goodStr := ""
-		c := 'a'
+	oxygen := make([]string, len(strList))
+	c02 := make([]string, len(strList))
 
-		for i := 0; i < len(strList); i++ {
-			r := []rune(strList[i])
-			switch j {
-			case 1:
-				c = []rune(common1[1])
-				break
-			case 2:
-				c = []rune(common2)
-				break
-			case 3:
-				c = []rune(common3)
-				break
-			case 4:
-				c = []rune(common4)
-				break
-			case 5:
-				c = []rune(common5)
-				break
-			case 6:
-				c = []rune(common6)
-				break
-			case 7:
-				c = []rune(common7)
-				break
-			case 8:
-				c = []rune(common8)
-				break
-			case 9:
-				c = []rune(common9)
-				break
-			case 10:
-				c = []rune(common10)
-				break
-			case 11:
-				c = []rune(common11)
-				break
-			case 12:
-				c = []rune(common12)
-				break
+	copyOxygen := copy(oxygen, strList)
+	copyc02 := copy(c02, strList)
+	fmt.Println(copyOxygen, copyc02)
+
+	for j := 0; j < 11; j++ {
+		rOxy := []rune(oxygen[j])
+		rCommon := []rune(commonStr)
+		for i := 0; i < len(oxygen)-1; i++ {
+			if rOxy[j] != rCommon[j] {
+				oxygen = append(oxygen[:i], oxygen[i+1:]...)
+			} else {
+				c02 = append(c02[:i], c02[i+1:]...)
 			}
 		}
+		if rOxy[j] != rCommon[j] {
+			oxygen = append(oxygen[:len(oxygen)-1])
+		} else {
+			c02 = append(c02[:len(c02)-1])
+		}
 	}
+
+	for i := 0; i < len(oxygen)-1; i++ {
+		rOxy := []rune(oxygen[len(oxygen)-1])
+		rCommon := []rune(commonStr)
+		if rOxy[11] != rCommon[11] {
+			oxygen = append(oxygen[:i])
+		} else {
+			c02 = append(c02[:i])
+		}
+	}
+
+	fmt.Println(oxygen, "\n", c02)
 }
