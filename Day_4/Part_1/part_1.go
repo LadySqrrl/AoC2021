@@ -37,13 +37,14 @@ func main() {
 
 	//for x := 0; x < len(draws); x++ {
 	//currDraw := draws[x]
-	for i := 1; i < len(strList); i++ {
-		line := strings.Split(strList[i], " ")
-		for j := 0; j < len(line); j++ {
-			if line[0] != "Z" {
-				card[i-1][j] = line[j]
-			}
-		}
+	for i := 2; i < len(strList); i++ {
+		line := strings.Split(strList[i], ",")
+		//for j := 0; j < 5; j++ {
+		//	if line[0] != "Z" {
+		//		card[i-1][j] = line[j]
+		//	}
+		//}
+		fmt.Println(line)
 	}
 	fmt.Println(card)
 	//}
