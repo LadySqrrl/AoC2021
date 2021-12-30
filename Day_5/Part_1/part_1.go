@@ -5,6 +5,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
 func readLines(path string) ([]string, error) {
@@ -23,10 +24,10 @@ func readLines(path string) ([]string, error) {
 }
 
 func main() {
-	/*strList, err := readLines("input.txt")
+	strList, err := readLines("input.txt")
 	if err != nil {
 		panic(err)
-	}*/
+	}
 
 	lineCrossings := [10][10]string{}
 
@@ -34,6 +35,10 @@ func main() {
 		for j := 0; j < 10; j++ {
 			lineCrossings[i][j] = "."
 		}
+	}
+
+	for i := 0; i < len(strList); i++ {
+		dir := strings.Split(strList[i], " ")
 	}
 
 	fmt.Println(lineCrossings)
