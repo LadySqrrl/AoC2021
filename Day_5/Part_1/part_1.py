@@ -13,19 +13,71 @@ with open('input.txt') as dir:
 for line in lines:
     line = line.replace(" -> ", ",")
     dir = line.split(",")
-    x1 = dir[0]
-    y1 = dir[1]
-    x2 = dir[2]
-    y2 = dir[3]
-    xDiff = int(x2) - int(x1)
-    yDiff = int(y2) - int(y1)        
+    x1 = int(dir[0])
+    y1 = int(dir[1])
+    x2 = int(dir[2])
+    y2 = int(dir[3])
+    xDiff = x2 - x1
+    yDiff = y2 - y1        
     movex = abs(xDiff)
     movey = abs(yDiff)
 
-    print(xDiff)
-    print(yDiff)
-    print(movex)
-    print(movey)
-    
+    if xDiff < 0 & yDiff < 0:
+        if movex >= movey:
+            while movex > 0:
+                ventMap[x1][y1] += 1
+                movex -= 1
+                x1 -= 1
+                y1 -= 1
+        else:
+            while movey > 0:
+                ventMap[x1][y1] += 1
+                movex -= 1
+                x1 -= 1
+                y1 -= 1
+    elif xDiff >= 0 & yDiff >= 0:    
+        if movex >= movey:
+            while movex > 0:
+                ventMap[x1][y1] += 1
+                movex -= 1
+                x1 += 1
+                y1 += 1
+        else:
+            while movey > 0:
+                ventMap[x1][y1] += 1
+                movex -= 1
+                x1 += 1
+                y1 += 1
+    elif xDiff >= 0 & yDiff < 0:
+        if movex >= movey:
+            while movex > 0:
+                ventMap[x1][y1] += 1
+                movex -= 1
+                x1 += 1
+                y1 -= 1
+        else:
+            while movey > 0:
+                ventMap[x1][y1] += 1
+                movex -= 1
+                x1 += 1
+                y1 -= 1
+    else:
+        if movex >= movey:
+            while movex > 0:
+                ventMap[x1][y1] += 1
+                movex -= 1
+                x1 -= 1
+                y1 += 1
+        else:
+            while movey > 0:
+                ventMap[x1][y1] += 1
+                movex -= 1
+                x1 -= 1
+                y1 += 1
+total = 0
 
+for item in ventMap:
+    if item > 1:
+        total += 1
 
+print(total)
